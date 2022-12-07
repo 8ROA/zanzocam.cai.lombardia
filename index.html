@@ -1,0 +1,93 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Webcam CAI Lombardia</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <p class="heading">Webcam Commissione Rifugi - CAI Lombardia</p><br>
+  
+  <center><a href="https://www.cai.it/organo_tecnico/commissione-centrale-rifugi/lombardia/incontri/" target="_blank">
+  <button style="cursor: pointer; padding: .5%; font-size: large;"><b>Pagina Commissione Rifugi</b></button></a></center>
+  
+  <div id="gallery" class="gallery-image"></div> <!-- Lodges gallery container -->
+</body>
+
+<script>
+  // lodges[] contains the data to display correctly every lodge
+  // The parameters are then sent to the gallery page via URL
+  const lodges = [
+    { name: "Rifugio Del Grande-Camerini", ID: "00003157", file_name: "image", is_active: 1 },
+    { name: "Rifugio Del Grande-Camerini - Monte Disgrazia", ID: "90003157", file_name: "image", is_active: 1 },
+    { name: "Rifugio Dalco", ID: "00002089", file_name: "image", is_active: 1 },
+    { name: "Rifugio Ventina", ID: "00002432", file_name: "image", is_active: 1 },
+    { name: "Rifugio Motta", ID: "00002640", file_name: "image", is_active: 1 },
+    { name: "Rifugio Rosalba", ID: "00002575", file_name: "foto", is_active: 1 },
+    { name: "Rifugio Della Corte", ID: "00002272", file_name: "image", is_active: 1 },
+    { name: "Rifugio Salmurano", ID: "00002067", file_name: "image", is_active: 1 },
+    { name: "Rifugio Shambalà", ID: "00001606", file_name: "image", is_active: 1 },
+    { name: "Rifugio Brasca", ID: "00002596", file_name: "image", is_active: 1 },
+    { name: "Rifugio Omio", ID:"00001765", file_name: "image", is_active: 1 },
+    { name: "Rifugio Longo", ID:"00002935", file_name: "image", is_active: 1 },
+    { name: "Rifugio Pialeral", ID: "00001825", file_name: "image", is_active: 1 },
+    { name: "Rifugio Longoni", ID: "00002556", file_name: "image", is_active: 1 },
+    { name: "Rifugio Zoia", ID: "00001785", file_name: "image", is_active: 1 },
+    { name: "Bivacco Città di Cantù", ID: "90002047", file_name: "image", is_active: 1 },
+    { name: "Rifugio Gherardi", ID:"00003256", file_name: "foto", is_active: 1 },
+    { name: "Rifugio Calvi", ID:"00003275", file_name: "foto", is_active: 1 },
+    { name: "Rifugio Brioschi", ID: "00002605", file_name: "foto", is_active: 1 },
+    { name: "Rifugio Quinto Alpini", ID: "00002047", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Tagliaferri", ID: "00003295", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Passo San Marco", ID: "00002416", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Marinelli Bombardieri", ID: "00001846", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Città di Lissone", ID: "00002557", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Gianetti Piacco", ID: "00002595", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Porta", ID: "00002637", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Allievi Bonacossa", ID: "00002617", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Gerli Porro", ID: "00002600", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Bignami", ID: "00002603", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Ponti", ID: "00002604", file_name: "foto", is_active: 0 },
+    { name: "Rifugio Bozzi", ID: "00002558", file_name: "foto", is_active: 0 }
+  ]
+
+  // Create all lodges images, with caption and hyperlink to the gallery
+  const Gallery = document.getElementById('gallery');
+  for (let index = 0; index < lodges.length; index++) {
+    if(lodges[index].is_active) {
+    Gallery.innerHTML +=
+    '<div>' +
+      '<a target="_self" href="gallery.html?name='+encodeURIComponent(lodges[index].name)+'&ID='+lodges[index].ID+'&file_name='+lodges[index].file_name+'">' +
+        '<div class="img-box">' +
+          '<img src="https://webcam.rifugi.lombardia.it/rifugio/' + lodges[index].ID + '/pictures/'+lodges[index].file_name+'__0.thumb.jpg" alt=""/>' +
+          '<div class="transparent-box">' +
+            '<div class="caption">' +
+              '<p>' + lodges[index].name + '</p>' +
+              '<p class="opacity-low">Vedi le ultime foto!</p>' +
+            '</div>' + 
+          '</div>' + 
+        '</div>' + 
+      '</a>' +
+      '<p class="nome-rifugio">' + lodges[index].name + '</p>' +
+    '</div>';
+    }
+    else {
+    Gallery.innerHTML +=
+    '<div>' +
+      '<a target="_self" href="webcam-not-active.html">' +
+        '<div class="img-box">' +
+          '<img src="images/webcam-not-active.png" alt=""/>' +
+          '<div class="transparent-box">' +
+            '<div class="caption">' +
+              '<p>' + lodges[index].name + '</p>' +
+              '<p class="opacity-low">La webcam non è attiva!</p>' +
+            '</div>' + 
+          '</div>' + 
+        '</div>' + 
+      '</a>' +
+      '<p class="nome-rifugio">' + lodges[index].name + '</p>' +
+    '</div>';
+    }
+  }
+</script>
+</html>
